@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
+import PropTypes from 'prop-types';
 
-export default class Board extends Component {
-  
+const propTypes = {
+    onClick: PropTypes.func.isRequired
+};
+
+class Board extends Component {
   render() {
     return (    
         <View style={styles.container}> 
@@ -34,7 +38,7 @@ export default class Board extends Component {
         </View>
     );
   }
-}
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -61,3 +65,6 @@ const styles = StyleSheet.create({
     }
   });
 
+Board.propTypes = propTypes;
+
+export default Board;

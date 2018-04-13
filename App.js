@@ -9,6 +9,13 @@ export default class App extends Component {
     Alert.alert('You tapped! ' + squareClicked )
   }
 
+  CONSTANTS = {
+     PLAYER1: "Player 1",
+     PLAYER2: "COM",
+     PLAYER1_MOVE: "X",
+     PLAYER2_MOVE: "O"
+  }
+
   render() {
     return (
       <View style={styles.container}>

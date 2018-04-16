@@ -5,6 +5,11 @@ import Board from './Components/Board'
 
 export default class App extends Component {
   
+  CONSTANTS = {
+    PLAYER1: "Player 1",
+    PLAYER2: "COM"
+  };
+
   handleSquareClick(row, column) {
     Alert.alert(row + ' - ' + column );
   };
@@ -12,25 +17,29 @@ export default class App extends Component {
   checkEndGame() {
     
   }
+  
+  newBoard() {
+    return [
+      [0, 0, 0], 
+      [0, 0, 0], 
+      [0, 0, 0]
+    ];
+  }
 
-  boardGame = [ 
-    [null, null, null], 
-    [null, null, null], 
-    [null, null, null], 
-  ];
+  newGame() {
+    this.boardGame = this.newBoard(); 
+    this.currentPlayer = this.CONSTANTS.PLAYER1;
+  }
 
-  CONSTANTS = {
-    PLAYER1: "Player 1",
-    PLAYER2: "COM"
-  };
-
-  currentPlayer = this.CONSTANTS.PLAYER1;
+  componentWillMount() {
+    this.newGame();
+  }
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={ styles.container }>
         
-        <Player playerName={this.currentPlayer}/>
+        <Player playerName={ this.currentPlayer } />
         
         <Board 
           style={ styles.board_container } 

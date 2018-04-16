@@ -6,18 +6,39 @@ const propTypes = {
     onClick: PropTypes.func.isRequired,
     row: PropTypes.number.isRequired,
     column: PropTypes.number.isRequired,
-    disabled: PropTypes.bool.isRequired,
-    mark: PropTypes.string.isRequired
+    move: PropTypes.number.isRequired
 };
 
 class Square extends Component {
+ 
+    CONSTANTS = {
+        PLAYER1_MOVE: "X",
+        PLAYER2_MOVE: "O"
+    };
+
+
+    evaluatePosition() {
+        return this.props.move == 1 || this.props.move == -1 ? true : false;
+    }
+
+    drawPosition() {
+        switch (this.props.move) {
+            case 1:
+                return this.CONSTANTS.PLAYER1_MOVE;
+            case -1:
+                return this.CONSTANTS.PLAYER2_MOVE;
+            default:
+                return "";
+        }
+    }
+
     render() {
         return (
             <View style={ styles.container }>
                 <Button
-                    disabled={this.props.disabled} 
                     style={ styles.button } 
-                    title={ this.props.mark } 
+                    disabled={ this.evaluatePosition() } 
+                    title={ this.drawPosition() } 
                     onPress={ () => this.props.onClick( this.props.row, this.props.column ) } 
                 />
             </View>
@@ -31,11 +52,14 @@ const styles = StyleSheet.create({
         borderColor: '#000000',
         borderWidth: 1,
         width: 100,
-        height: 100
+        height: 100,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column'
       },
       button: {
         width: 100,
-        height: 200
+        height: 100,
       }
 });
 

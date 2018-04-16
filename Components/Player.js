@@ -6,8 +6,7 @@ const propTypes = {
   playerName: PropTypes.string.isRequired
 };
 
-class Turn extends Component {
-
+class Player extends Component {
   render() {
     return (
       <View> 
@@ -24,6 +23,6 @@ const styles = StyleSheet.create({
   }
 });
 
-Turn.propTypes = propTypes;
+Player.propTypes = propTypes;
 
-export default Turn;
+export default Player;

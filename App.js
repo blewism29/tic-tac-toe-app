@@ -1,30 +1,43 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, Alert } from 'react-native';
-import Turn from './Components/Turn'
+import Player from './Components/Player'
 import Board from './Components/Board'
 
 export default class App extends Component {
   
-  handleSquareClick(squareClicked) {
-    Alert.alert('You tapped! ' + squareClicked )
+  handleSquareClick(row, column) {
+    Alert.alert(row + ' - ' + column );
+  };
+
+  checkEndGame() {
+    
   }
 
+  boardGame = [ 
+    [null, null, null], 
+    [null, null, null], 
+    [null, null, null], 
+  ];
+
   CONSTANTS = {
-     PLAYER1: "Player 1",
-     PLAYER2: "COM",
-     PLAYER1_MOVE: "X",
-     PLAYER2_MOVE: "O"
-  }
+    PLAYER1: "Player 1",
+    PLAYER2: "COM"
+  };
+
+  currentPlayer = this.CONSTANTS.PLAYER1;
 
   render() {
     return (
       <View style={styles.container}>
         
-        <Turn playerName='Player 1'/>
+        <Player playerName={this.currentPlayer}/>
+        
         <Board 
-          style={styles.board_container} 
-          onClick={this.handleSquareClick}
+          style={ styles.board_container } 
+          onClick={ this.handleSquareClick }
+          boardGame={ this.boardGame }
         />
+
       </View>
     );
   }

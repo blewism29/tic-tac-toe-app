@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 import Player from './Components/Player'
 import Board from './Components/Board'
+import minimax from './Logic/minimax'
 
 export default class App extends Component {
   
@@ -11,11 +12,36 @@ export default class App extends Component {
   };
 
   handleSquareClick(row, column) {
-    Alert.alert(row + ' - ' + column );
+    //Alert.alert(row + ' - ' + column);
+    
+    this.boardGame[row][column] = 1;
+    this.setState ( { boardGame : this.boardGame } );
+
+    this.setState( { currentPlayer: this.CONSTANTS.PLAYER2 } );
+    
+    if (!this.checkEndGame()) {
+      
+      var newBoard = [
+        this.boardGame[0].slice(0), 
+        this.boardGame[1].slice(0), 
+        this.boardGame[2].slice(0), 
+      ];
+
+      var score = minimax.makeMove(newBoard, -1, -1, 0);
+      if (score) {
+        var move = minimax.lastMove;
+        this.boardGame[move.row][move.column] = -1;
+        this.setState ( { boardGame: this.boardGame } );
+      }
+    }
+
+    this.setState( { currentPlayer: this.CONSTANTS.PLAYER1 } );
+
+    console.log(this.boardGame);
   };
 
   checkEndGame() {
-    
+    return minimax.gameOver(this.boardGame);
   }
   
   newBoard() {
@@ -35,16 +61,25 @@ export default class App extends Component {
     this.newGame();
   }
 
+  constructor (props) {
+    super(props);
+    this.handleSquareClick = this.handleSquareClick.bind(this);
+
+    this.state = {
+      currentPlayer: this.CONSTANTS.PLAYER1,
+      boardGame: this.newBoard()
+    };
+  }
+
   render() {
     return (
       <View style={ styles.container }>
         
-        <Player playerName={ this.currentPlayer } />
+        <Player playerName={ this.state.currentPlayer } />
         
         <Board 
-          style={ styles.board_container } 
           onClick={ this.handleSquareClick }
-          boardGame={ this.boardGame }
+          boardGame={ this.state.boardGame }
         />
 
       </View>

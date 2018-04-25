@@ -1,4 +1,4 @@
-var minimax = {
+const Minimax = {
 
     CONSTANTS: {
         POINTS: {
@@ -14,15 +14,15 @@ var minimax = {
             return this.CONSTANTS.POINTS.LOSER;
         } else if (this.win(board, -1)) {
             return this.CONSTANTS.POINTS.WINNER;
-        } else {
-            return 0;
         }
+        
+        return 0;
     },
 
-    win: function(board, player) {
+    win: function (board, player) {
         var searching;
         
-        if (player == 1) {
+        if (player === 1) {
             searching = 1;
         } else {
             searching = -1;
@@ -30,25 +30,25 @@ var minimax = {
 
         var i = 0;
         for (i = 0; i < board.length; i++) {
-            if (board[i].indexOf(-1 * searching) == -1 && board[i].indexOf(0) == -1) return true; // Row win
+            if (board[i].indexOf(-1 * searching) === -1 && board[i].indexOf(0) == -1) return true; // Row win
 
-            column = [
+            const column = [
                 board[0][i], 
                 board[1][i], 
                 board[2][i]
             ];
 
-            if (column.indexOf(-1 * searching) == -1 && column.indexOf(0) == -1) return true; // Column win
+            if (column.indexOf(-1 * searching) === -1 && column.indexOf(0) == -1) return true; // Column win
         }
 
         // Diagonal win
-        var diagonal = [
+        let diagonal = [
             board[0][0], 
             board[1][1], 
             board[2][2]
         ];
 
-        if (diagonal.indexOf(-1 * searching) == -1 && diagonal.indexOf(0) == -1) return true;
+        if (diagonal.indexOf(-1 * searching) === -1 && diagonal.indexOf(0) == -1) return true;
 
         diagonal = [
             board[0][2], 
@@ -56,7 +56,7 @@ var minimax = {
             board[2][0]
         ];
         
-        if (diagonal.indexOf(-1 * searching) == -1 && diagonal.indexOf(0) == -1) return true;
+        if (diagonal.indexOf(-1 * searching) === -1 && diagonal.indexOf(0) == -1) return true;
 
         return false;
     },
@@ -71,8 +71,8 @@ var minimax = {
 
         for (var i = 0; i < 3; i++) {
             for (var j = 0; j < 3; j++) {
-                if (board[i][j] == 0) {
-                    possibleMoves.push({row: i, column: j})
+                if (board[i][j] === 0) {
+                    possibleMoves.push({ row: i, column: j })
                 }
             }
         }
@@ -81,29 +81,29 @@ var minimax = {
     },
 
     getNewState: function (board, move, player) {
-        newState = board.slice(0); // clone array
+        newState = [...board]; //board.slice(0); // clone array
         newState[move.row][move.column] = player;
         return newState;
     },
 
-    makeMove: function (board, player, playerDefault, depth){
+    makeMove: function (board, player, playerDefault, depth) {
         
         if (this.gameOver(board)) return this.score(board);
         
-        var scores = [],
-            moves = [];
+        var scores = [];
+        var moves = [];
 
         possibleMoves = this.getAvailableMoves(board, player);
         possibleMoves.forEach (
             (possibleMove) => {
                 possibleGame = this.getNewState(board, possibleMove, player);
-                scores.push(this.makeMove(possibleGame, -1 * player, player, depth++) - depth);
+                scores.push(this.makeMove(possibleGame, -1 * player, player, depth++) - (2 * depth));
                 moves.push(possibleMove);
             }
         );
 
         var number;
-        if (playerDefault == 1) {
+        if (playerDefault === 1) {
             // min
             number = Math.min.apply(null, scores);
         } else {
@@ -111,18 +111,11 @@ var minimax = {
             number = Math.max.apply(null, scores);
         }
 
-        var index = scores.indexOf(number);
-        //console.log(index);
-        //console.log(moves);
-        //console.log(scores);
-
-        if (moves[index] != undefined) {
-            //console.log(moves[index]);
-            this.lastMove = moves[index];
-        }
+        const index = scores.indexOf(number);
+        this.lastMove = moves[index];
 
         return number;
     }
 }
 
-export default minimax;
+export default Minimax;

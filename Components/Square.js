@@ -16,12 +16,11 @@ class Square extends Component {
         PLAYER2_MOVE: "O"
     };
 
-
-    evaluatePosition() {
+    evaluatePosition () {
         return this.props.move == 1 || this.props.move == -1 ? true : false;
     }
 
-    drawPosition() {
+    drawPosition () {
         switch (this.props.move) {
             case 1:
                 return this.CONSTANTS.PLAYER1_MOVE;
@@ -32,7 +31,7 @@ class Square extends Component {
         }
     }
 
-    render() {
+    render () {
         return (
             <View style={ styles.container }>
                 <Button

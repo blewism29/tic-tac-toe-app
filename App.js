@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 import Player from './Components/Player'
 import Board from './Components/Board'
-import minimax from './Logic/minimax'
+import Minimax from './Logic/Minimax'
 
 export default class App extends Component {
   
@@ -11,40 +11,39 @@ export default class App extends Component {
     PLAYER2: "COM"
   };
 
-  handleSquareClick(row, column) {
-    //Alert.alert(row + ' - ' + column);
+  handleSquareClick (row, column) {
     
     this.boardGame[row][column] = 1;
-    this.setState ( { boardGame : this.boardGame } );
+    this.setState({ boardGame : this.boardGame });
 
-    this.setState( { currentPlayer: this.CONSTANTS.PLAYER2 } );
+    this.setState({ currentPlayer: this.CONSTANTS.PLAYER2 });
     
     if (!this.checkEndGame()) {
-      
-      var newBoard = [
-        this.boardGame[0].slice(0), 
-        this.boardGame[1].slice(0), 
-        this.boardGame[2].slice(0), 
+      const newBoard = [
+        [...this.boardGame[0]], 
+        [...this.boardGame[1]],
+        [...this.boardGame[2]]
       ];
 
-      var score = minimax.makeMove(newBoard, -1, -1, 0);
-      if (score) {
-        var move = minimax.lastMove;
+      const score = Minimax.makeMove(newBoard, -1, -1, 0);
+      if (score !== null) {
+        const move = Minimax.lastMove;
         this.boardGame[move.row][move.column] = -1;
-        this.setState ( { boardGame: this.boardGame } );
+        this.setState ({ boardGame: this.boardGame });
+        console.log(move);
       }
     }
 
-    this.setState( { currentPlayer: this.CONSTANTS.PLAYER1 } );
+    this.setState({ currentPlayer: this.CONSTANTS.PLAYER1 });
 
-    console.log(this.boardGame);
+    //console.log(this.boardGame);
   };
 
-  checkEndGame() {
-    return minimax.gameOver(this.boardGame);
+  checkEndGame () {
+    return Minimax.gameOver(this.boardGame);
   }
   
-  newBoard() {
+  newBoard () {
     return [
       [0, 0, 0], 
       [0, 0, 0], 
@@ -52,12 +51,12 @@ export default class App extends Component {
     ];
   }
 
-  newGame() {
+  newGame () {
     this.boardGame = this.newBoard(); 
     this.currentPlayer = this.CONSTANTS.PLAYER1;
   }
 
-  componentWillMount() {
+  componentWillMount () {
     this.newGame();
   }
 
@@ -71,7 +70,7 @@ export default class App extends Component {
     };
   }
 
-  render() {
+  render () {
     return (
       <View style={ styles.container }>
         

@@ -7,7 +7,7 @@ const propTypes = {
 };
 
 class Player extends Component {
-  render() {
+  render () {
     return (
       <View> 
         <Text> { this.props.playerName } </Text>

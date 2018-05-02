@@ -20,17 +20,10 @@ const Minimax = {
     },
 
     win: function (board, player) {
-        var searching;
-        
-        if (player === 1) {
-            searching = 1;
-        } else {
-            searching = -1;
-        }
 
         var i = 0;
         for (i = 0; i < board.length; i++) {
-            if (board[i].indexOf(-1 * searching) === -1 && board[i].indexOf(0) == -1) return true; // Row win
+            if (board[i].indexOf(-1 * player) === -1 && board[i].indexOf(0) === -1) return true; // Row win
 
             const column = [
                 board[0][i], 
@@ -38,7 +31,7 @@ const Minimax = {
                 board[2][i]
             ];
 
-            if (column.indexOf(-1 * searching) === -1 && column.indexOf(0) == -1) return true; // Column win
+            if (column.indexOf(-1 * player) === -1 && column.indexOf(0) === -1) return true; // Column win
         }
 
         // Diagonal win
@@ -48,7 +41,7 @@ const Minimax = {
             board[2][2]
         ];
 
-        if (diagonal.indexOf(-1 * searching) === -1 && diagonal.indexOf(0) == -1) return true;
+        if (diagonal.indexOf(-1 * player) === -1 && diagonal.indexOf(0) === -1) return true;
 
         diagonal = [
             board[0][2], 
@@ -56,7 +49,7 @@ const Minimax = {
             board[2][0]
         ];
         
-        if (diagonal.indexOf(-1 * searching) === -1 && diagonal.indexOf(0) == -1) return true;
+        if (diagonal.indexOf(-1 * player) === -1 && diagonal.indexOf(0) === -1) return true;
 
         return false;
     },
@@ -69,19 +62,23 @@ const Minimax = {
         
         possibleMoves = [];
 
-        for (var i = 0; i < 3; i++) {
-            for (var j = 0; j < 3; j++) {
-                if (board[i][j] === 0) {
-                    possibleMoves.push({ row: i, column: j })
-                }
+        board.forEach (
+            (row, rowIndex) => {
+                row.forEach (
+                    (cell, index) => {
+                        if (cell === 0) {
+                            possibleMoves.push({ row: rowIndex, column: index })
+                        }
+                    }
+                );
             }
-        }
+        );
 
         return possibleMoves;
     },
 
     getNewState: function (board, move, player) {
-        newState = [...board]; //board.slice(0); // clone array
+        newState = [...board]; // clone array
         newState[move.row][move.column] = player;
         return newState;
     },

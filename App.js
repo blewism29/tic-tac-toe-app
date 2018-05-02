@@ -12,35 +12,35 @@ export default class App extends Component {
   };
 
   handleSquareClick (row, column) {
-    
-    this.boardGame[row][column] = 1;
-    this.setState({ boardGame : this.boardGame });
 
-    this.setState({ currentPlayer: this.CONSTANTS.PLAYER2 });
+    const boardCopy = [...this.state.boardGame];
+    boardCopy[row][column] = 1;
+    
+    this.setState({ boardGame: boardCopy, currentPlayer: this.CONSTANTS.PLAYER2 });
     
     if (!this.checkEndGame()) {
       const newBoard = [
-        [...this.boardGame[0]], 
-        [...this.boardGame[1]],
-        [...this.boardGame[2]]
+        [...this.state.boardGame[0]], 
+        [...this.state.boardGame[1]],
+        [...this.state.boardGame[2]]
       ];
 
       const score = Minimax.makeMove(newBoard, -1, -1, 0);
       if (score !== null) {
         const move = Minimax.lastMove;
-        this.boardGame[move.row][move.column] = -1;
-        this.setState ({ boardGame: this.boardGame });
+        const board = [...this.state.boardGame];
+        board[move.row][move.column] = -1;
+        
+        this.setState({ boardGame: board });
         console.log(move);
       }
     }
 
     this.setState({ currentPlayer: this.CONSTANTS.PLAYER1 });
-
-    //console.log(this.boardGame);
   };
 
   checkEndGame () {
-    return Minimax.gameOver(this.boardGame);
+    return Minimax.gameOver(this.state.boardGame);
   }
   
   newBoard () {
@@ -52,12 +52,7 @@ export default class App extends Component {
   }
 
   newGame () {
-    this.boardGame = this.newBoard(); 
-    this.currentPlayer = this.CONSTANTS.PLAYER1;
-  }
-
-  componentWillMount () {
-    this.newGame();
+    this.setState({ boardGame: this.newBoard(), currentPlayer: this.CONSTANTS.PLAYER1 });
   }
 
   constructor (props) {

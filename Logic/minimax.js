@@ -90,10 +90,10 @@ const Minimax = {
         var scores = [];
         var moves = [];
 
-        possibleMoves = this.getAvailableMoves(board, player);
+        const possibleMoves = this.getAvailableMoves(board, player);
         possibleMoves.forEach (
             (possibleMove) => {
-                possibleGame = this.getNewState(board, possibleMove, player);
+                const possibleGame = this.getNewState(board, possibleMove, player);
                 scores.push(this.makeMove(possibleGame, -1 * player, player, depth++) - (2 * depth));
                 moves.push(possibleMove);
             }

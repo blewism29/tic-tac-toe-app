@@ -54,8 +54,12 @@ const Minimax = {
         return false;
     },
 
+    areMovesAvailable: function (board) {
+        return board[0].indexOf(0) !== -1 || board[1].indexOf(0) !== -1 || board[2].indexOf(0) !== -1;
+    },
+
     gameOver: function (board) {
-        return this.win(board, 1) || this.win(board, -1);
+        return this.win(board, 1) || this.win(board, -1) || !this.areMovesAvailable(board);
     },
 
     getAvailableMoves: function (board, player) {

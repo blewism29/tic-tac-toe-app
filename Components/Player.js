@@ -10,7 +10,7 @@ class Player extends Component {
   render () {
     return (
       <View> 
-        <Text> { this.props.playerName } </Text>
+        <Text> {this.props.playerName} </Text>
       </View>
     );
   }

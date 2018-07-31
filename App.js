@@ -7,8 +7,8 @@ import Minimax from './Logic/Minimax'
 export default class App extends Component {
   
   CONSTANTS = {
-    PLAYER1: "Player 1",
-    PLAYER2: "COM"
+    PLAYER1: 'Player 1',
+    PLAYER2: 'COM'
   };
 
   handleSquareClick (row, column) {
@@ -67,13 +67,13 @@ export default class App extends Component {
 
   render () {
     return (
-      <View style={ styles.container }>
+      <View style={styles.container}>
         
-        <Player playerName={ this.state.currentPlayer } />
+        <Player playerName={this.state.currentPlayer} />
         
         <Board 
-          onClick={ this.handleSquareClick }
-          boardGame={ this.state.boardGame }
+          onClick={this.handleSquareClick}
+          boardGame={this.state.boardGame}
         />
 
       </View>

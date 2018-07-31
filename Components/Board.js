@@ -12,68 +12,68 @@ class Board extends Component {
 
     render() {
         return (    
-            <View style={ styles.container }> 
+            <View style={styles.container}> 
             
-                <View style={ styles.row }> 
+                <View style={styles.row}> 
                     <Square 
-                        onClick={ this.props.onClick } 
-                        row={ 0 }
-                        column={ 0 }
-                        move={ this.props.boardGame[0][0] }
+                        onClick={this.props.onClick} 
+                        row={0}
+                        column={0}
+                        move={this.props.boardGame[0][0]}
                     />
                     <Square 
-                        onClick={ this.props.onClick } 
-                        row={ 0 }
-                        column={ 1 }
-                        move={ this.props.boardGame[0][1] }
+                        onClick={this.props.onClick} 
+                        row={0}
+                        column={1}
+                        move={this.props.boardGame[0][1]}
                     />
                     <Square 
-                        onClick={ this.props.onClick } 
+                        onClick={this.props.onClick} 
                         row={ 0 }
                         column={ 2 }
-                        move={ this.props.boardGame[0][2] }
+                        move={this.props.boardGame[0][2]}
                     />
                 </View>
 
-                <View style={ styles.row }> 
+                <View style={styles.row}> 
                     <Square 
-                        onClick={ this.props.onClick } 
-                        row={ 1 }
-                        column={ 0 }
-                        move={ this.props.boardGame[1][0] }
+                        onClick={this.props.onClick} 
+                        row={1}
+                        column={0}
+                        move={this.props.boardGame[1][0]}
                     />
                     <Square 
-                        onClick={ this.props.onClick } 
-                        row={ 1 }
-                        column={ 1 }
-                        move={ this.props.boardGame[1][1] }
+                        onClick={this.props.onClick} 
+                        row={1}
+                        column={1}
+                        move={this.props.boardGame[1][1]}
                     />
                     <Square 
-                        onClick={ this.props.onClick } 
-                        row={ 1 }
-                        column={ 2 }
-                        move={ this.props.boardGame[1][2] }
+                        onClick={this.props.onClick} 
+                        row={1}
+                        column={2}
+                        move={this.props.boardGame[1][2]}
                     />
                 </View>
                 
-                <View style={ styles.row }> 
+                <View style={styles.row}> 
                     <Square 
-                        onClick={ this.props.onClick } 
-                        row={ 2 }
-                        column={ 0 }
-                        move={ this.props.boardGame[2][0] }
+                        onClick={this.props.onClick} 
+                        row={2}
+                        column={0}
+                        move={this.props.boardGame[2][0]}
                     />
                     <Square 
-                        onClick={ this.props.onClick } 
-                        row={ 2 }
-                        column={ 1 }
-                        move={ this.props.boardGame[2][1] }
+                        onClick={this.props.onClick} 
+                        row={2}
+                        column={1}
+                        move={this.props.boardGame[2][1]}
                     />
                     <Square 
-                        onClick={ this.props.onClick } 
-                        row={ 2 }
-                        column={ 2 }
-                        move={ this.props.boardGame[2][2] }
+                        onClick={this.props.onClick} 
+                        row={2}
+                        column={2}
+                        move={this.props.boardGame[2][2]}
                     />
                 </View>
             

@@ -12,8 +12,8 @@ const propTypes = {
 class Square extends Component {
  
     CONSTANTS = {
-        PLAYER1_MOVE: "X",
-        PLAYER2_MOVE: "O"
+        PLAYER1_MOVE: 'X',
+        PLAYER2_MOVE: 'O'
     };
 
     evaluatePosition () {
@@ -27,18 +27,18 @@ class Square extends Component {
             case -1:
                 return this.CONSTANTS.PLAYER2_MOVE;
             default:
-                return "";
+                return '';
         }
     }
 
     render () {
         return (
-            <View style={ styles.container }>
+            <View style={styles.container}>
                 <Button
-                    style={ styles.button } 
-                    disabled={ this.evaluatePosition() } 
-                    title={ this.drawPosition() } 
-                    onPress={ () => this.props.onClick( this.props.row, this.props.column ) } 
+                    style={styles.button} 
+                    disabled={this.evaluatePosition()} 
+                    title={this.drawPosition()} 
+                    onPress={() => this.props.onClick(this.props.row, this.props.column)} 
                 />
             </View>
         );
